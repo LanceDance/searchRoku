@@ -1,11 +1,9 @@
 '********** Copyright 2015 Roku Corp.  All Rights Reserved. **********
 
 sub Main()
-port = CreateObject("roMessagePort")
-screen = CreateObject("roSearchScreen")
-screen.SetMessagePort(port)
-screen.SetSearchButtonText("Search for something:")
-screen.SetClearButtonEnabled(false)
+screen = CreateObject("roSGScreen")
+m.port = CreateObject("roMessagePort")
+screen.setMessagePort(m.port)
 scene = screen.createScene("search_screen")
 screen.Show()
 
@@ -22,7 +20,7 @@ content = [
         ]
 while done = 0
 	msg = wait(0, screen.GetMessagePort())
-	if type(msg) = "roSearchScreenEvent"
+	if msgType = "roSGScreenEvent"
 		if msg.isFullResult()
 			for each item in content
 				if item = msg.isFullResult()

@@ -1,17 +1,54 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<component name="search_screen" extends="Scene" initialFocus="search">
-  <children>
-      <Rectangle
-        translation="[950, 530]"
-        width="20"
-        height="20"
-        id="center_square"
-        color="0xFF0000"/>
-      <Label
-        translation="[1720, 980]"
-        id="search"
-        font="font:LargeBoldSystemFont"
-        color="0x000000"
-        text="Search"/>
+<?xml version = "1.0" encoding = "utf-8" ?> 
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+
+<component name = "KeyboardDialogExample" extends = "Scene" >
+
+  <script type = "text/brightscript" >
+
+    <![CDATA[
+
+    sub init()
+
+      example = m.top.findNode("instructLabel")
+
+      examplerect = example.boundingRect()
+      centerx = (1280 - examplerect.width) / 2
+      centery = (720 - examplerect.height) / 2
+      example.translation = [ centerx, centery ]
+
+      m.top.setFocus(true)
+    end sub
+
+    sub showdialog()
+      keyboarddialog = createObject("roSGNode", "KeyboardDialog")
+      keyboarddialog.title = "Search for something"
+      m.top.dialog = keyboarddialog
+    end sub
+
+    function onKeyEvent(key as String, press as Boolean) as Boolean
+      if press then
+        if key = "OK"
+
+          showdialog()
+
+          return true
+        end if
+      end if
+
+      return false
+    end function
+
+    ]]>
+
+  </script>
+
+  <children >
+
+    <Label 
+      id = "instructLabel" 
+      text = "Press OK For Dialog" />
+
   </children>
+
 </component>
